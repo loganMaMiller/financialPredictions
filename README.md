@@ -13,4 +13,5 @@ The medium average uses 10,
 The long average uses 25
 
 Because the first set of entries doesn't have a long enough history to make a full medium and long average, a smaller history is used for the medium and short averages initially.
+
 Let n be the current number of entries, for n < 25: long average = n, for n < 20: medium average = n/2, small average = n/4
