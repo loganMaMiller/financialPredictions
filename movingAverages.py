@@ -7,7 +7,7 @@ def read_csv(csv_file):
         rows = list(reader)
     return rows
 
-def make_predictions(rows):
+def make_predictions(rows, output_csv_file):
     short_list = []
     medium_list = []
     long_list = []
@@ -67,7 +67,7 @@ def make_predictions(rows):
         prev_sta = short_avg
         prev_mta = medium_avg
         prev_lta = long_avg
-    with open('output.csv', "w", newline="") as file:
+    with open(output_csv_file, "w", newline="") as file:
         writer = csv.writer(file)
         writer.writerows(rows)
         
@@ -91,9 +91,11 @@ def trim_csv(rows):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="creates a csv based on a csv input")
     parser.add_argument("--input", required=True, help="Path to the input CSV file")
+    parser.add_argument("--output", required=True, help="Path to save the output CSV file")
     args = parser.parse_args()
     input_csv_file = args.input
+    output_csv_file = args.output
     rows = read_csv(input_csv_file)
     rows = trim_csv(rows)
     rows[0].append('What to DO (Buy or Sell or HOLD)')
-    make_predictions(rows)
+    make_predictions(rows,output_csv_file)
