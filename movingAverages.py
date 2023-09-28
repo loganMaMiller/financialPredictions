@@ -1,4 +1,5 @@
 import csv
+import argparse
 
 def read_csv(csv_file):
     with open(csv_file, "r") as file:
@@ -88,7 +89,11 @@ def trim_csv(rows):
     return [row[:4] for row in rows]
 
 if __name__ == '__main__':
-    rows = read_csv('stockValues.csv')
+    parser = argparse.ArgumentParser(description="creates a csv based on a csv input")
+    parser.add_argument("--input", required=True, help="Path to the input CSV file")
+    args = parser.parse_args()
+    input_csv_file = args.input
+    rows = read_csv(input_csv_file)
     rows = trim_csv(rows)
     rows[0].append('What to DO (Buy or Sell or HOLD)')
     make_predictions(rows)
